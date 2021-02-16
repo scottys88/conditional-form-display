@@ -1,0 +1,11 @@
+<app-container>
+  <h2>This is form two</h2>
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <label for="yesOrNo">Yes</label>
+    <input type="radio"  name="yesOrNo" value="true" formControlName="yesOrNo" />
+    <label for="yesOrNo">No</label>
+    <input type="radio" name="yesOrNo" value="false" formControlName="yesOrNo" />
+    <button type="submit">Submit</button>
+    </form>
+    <span *ngIf="formGroup.get('yesOrNo').errors?.required" role="alert">Required field</span>
+</app-container>

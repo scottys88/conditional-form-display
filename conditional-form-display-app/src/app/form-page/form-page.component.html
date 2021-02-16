@@ -1,0 +1,12 @@
+<app-form-one (formSubmit)="setFormOneStatus($event)">
+
+</app-form-one>
+<app-form-two *ngIf="formStatus.formOne.status" (formSubmit)="setFormTwoStatus($event)">
+
+</app-form-two>
+<app-form-three *ngIf="formStatus.formThree.status">
+
+</app-form-three>
+<app-form-four *ngIf="formStatus.formFour.status">
+
+</app-form-four>

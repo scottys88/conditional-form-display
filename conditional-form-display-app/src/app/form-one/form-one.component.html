@@ -1,0 +1,9 @@
+<app-container>
+  <h2>This is form one</h2>
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+      <label for="firstname">Firstname</label>
+      <input type="text" id="firstname" formControlName="firstname" />
+      <button type="submit">Submit</button>
+    </form>
+    <span *ngIf="formGroup.get('firstname').errors?.required && formGroup.get('firstname').dirty" role="alert">Required field</span>
+</app-container>
