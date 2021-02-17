@@ -11,6 +11,7 @@ import { FormFourComponent } from './form-four/form-four.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContainerComponent } from './layout/container/container.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormPageTwoComponent } from './form-page-two/form-page-two.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormTwoComponent,
     FormThreeComponent,
     FormFourComponent,
-    ContainerComponent
+    ContainerComponent,
+    FormPageTwoComponent
   ],
   imports: [
     BrowserModule,

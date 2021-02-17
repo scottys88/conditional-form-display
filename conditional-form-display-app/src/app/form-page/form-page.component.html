@@ -1,12 +1,17 @@
-<app-form-one (formSubmit)="setFormOneStatus($event)">
-
-</app-form-one>
-<app-form-two *ngIf="formStatus.formOne.status" (formSubmit)="setFormTwoStatus($event)">
-
-</app-form-two>
-<app-form-three *ngIf="formStatus.formThree.status">
-
-</app-form-three>
-<app-form-four *ngIf="formStatus.formFour.status">
-
-</app-form-four>
+<ng-container *ngFor="let form of forms">
+    <ng-container [ngSwitch]="form.formName">
+        <ng-container *ngIf="form.isActive">
+                <app-form-one *ngSwitchCase="'formOne'" (formSubmit)="setFormStatus($event); ">
+                </app-form-one>
+                <app-form-two *ngSwitchCase="'formTwo'" (formSubmit)="setFormStatus($event)">
+                    
+                </app-form-two>
+                <app-form-three *ngSwitchCase="'formThree'">
+                    
+                </app-form-three>
+                <app-form-four *ngSwitchCase="'formFour'">
+                    
+                </app-form-four>
+        </ng-container>
+    </ng-container>
+</ng-container>

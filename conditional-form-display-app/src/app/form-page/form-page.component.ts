@@ -7,37 +7,76 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormPageComponent implements OnInit {
   constructor() { }
-  formStatus = {
-    formOne: {
-      status: false
+  percentageComplete: number;
+  forms = [
+    {
+      formName: 'formOne',
+      isRequired: true,
+      isComplete: false,
+      isActive: true
+    },    
+    {
+      formName: 'formTwo',
+      isRequired: true,
+      isComplete: false,
+      isActive: false
     },
-    formTwo: {
-      status: false
+    {
+        formName: 'formThree',
+        isRequired: true,
+        isComplete: false,
+        isActive: false
     },
-    formThree: {
-      status: false
-    },
-    formFour: {
-      status: false
+    {
+        formName: 'formFour',
+        isRequired: true,
+        isComplete: false,
+        isActive: false
     }
+  ];
+
+  updateFormValue(formName: string, isRequired?: boolean, isComplete?: boolean, isActive?: boolean ) {
+    const formToUpdateIndex = this.forms.findIndex(form => form.formName === formName);
+    const formToUpdate = { ...this.forms[formToUpdateIndex], isRequired, isComplete, isActive };
+
+    const valuesBefore = this.forms.slice(0, formToUpdateIndex);
+    const valuesAfter = this.forms.slice(formToUpdateIndex + 1);
+
+    this.forms = [...valuesBefore, formToUpdate, ...valuesAfter];
+
+    console.log(this.forms);
   }
 
-
-  setFormOneStatus(value: any) {
-    this.formStatus.formOne.status = true;
-  }
-
-  setFormTwoStatus(value: any) {
+  setFormStatus(value: any) {
     console.log(value);
-    this.formStatus.formTwo.status = true;
-    if (value.yesOrNo === "true") {
-      this.formStatus.formThree.status = true;
-      this.formStatus.formFour.status = false;
-    } else {
-      this.formStatus.formThree.status = false;
-      this.formStatus.formFour.status = true;
+    if(value.formName === 'formOne') {
+      this.updateFormValue(value.formName, true, true, true);
+      this.updateFormValue('formTwo', true, false, true);
     }
+    if(value.formName === 'formTwo' && value.value.yesOrNo === 'true') {
+      this.updateFormValue(value.formName, true, true, true);
+      this.updateFormValue('formTwo', true, true, true);
+      this.updateFormValue('formThree', true, false, true);
+      this.updateFormValue('formFour', false, false, false);
+    }
+    if(value.formName === 'formTwo' && value.value.yesOrNo === 'false') {
+      this.updateFormValue(value.formName, true, true, true);
+      this.updateFormValue('formTwo', true, true, true);
+      this.updateFormValue('formThree', false, false, false);
+      this.updateFormValue('formFour', true, true, true);
+    }
+    this.setPageProgress();
   }
+
+  setPageProgress() {
+    const formCount = Object.keys(this.forms).length;
+    let completedForms = this.forms.filter(form => form.isComplete).length;
+
+    this.percentageComplete = (completedForms / formCount) * 100;
+
+    console.log(this.percentageComplete);    
+  }
+
 
   ngOnInit() {
   }

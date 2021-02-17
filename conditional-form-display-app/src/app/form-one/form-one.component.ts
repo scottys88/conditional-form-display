@@ -17,7 +17,7 @@ export class FormOneComponent implements OnInit {
   submit() {
     const isFormValid = this.formGroup.status === 'VALID';
     if (!isFormValid) { return; }
-    this.formSubmit.emit(this.formGroup.value);
+    this.formSubmit.emit({ value: this.formGroup.value, formName: 'formOne'});
   }
 
   ngOnInit() {
